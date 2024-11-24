@@ -16,6 +16,7 @@ Projeto feito na imersão back-end da alura. Por não conseguir subir no google 
 Para iniciar o projeto:
 ```bash
 npm run dev
+```
 
 - acessar documentação:
 ```bash
