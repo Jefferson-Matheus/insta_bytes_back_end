@@ -1,0 +1,89 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+        "title": "Insta bytes",
+        "description": "Projeto feito na imersão back-end da alura",
+        "version": "1.0.0"
+      },
+      "paths":{
+        "/posts":{
+            "get":{
+                "description": "Lista todos os posts",
+                "responses": {
+                    "200":{
+                        "description": "Sucesso"
+                    }
+                }
+            }
+        },
+        "/upload":{
+            "post":{
+                "description": "Upa uma imagem",
+                "requestBody":{
+                    "content":{
+                        "multipart/form-data":{
+                            "schema":{
+                                "type": "object",
+                                "properties":{
+                                    "description":{
+                                        "type": "string"
+                                    },
+                                    "image":{
+                                        "type": "string",
+                                        "format": "base64"
+                                    },
+                                    "alt":{
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses":{
+                    "200":{
+                        "description": "Sucesso"
+                    },
+                    "500":{
+                        "description": "Falha na requisição"
+                    }
+                }
+            }
+        },
+        "/upload/{id}":{
+            "put":{      
+            "description": "Atualiza e realiza a criação de um post",
+            "parameters":[
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "description": "O id do post a ser atualizado e criado"
+                }
+            ],
+            "requestBody":{
+                "content":{
+                    "application/json":{
+                        "schema":{
+                            "type": "object",
+                            "properties":{
+                                "alt":{
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "responses":{
+                "200":{
+                    "description": "Sucesso"
+                },
+                "500":{
+                    "description":"Falha na requisição"
+                }
+            }
+            }
+        }
+      }
+}

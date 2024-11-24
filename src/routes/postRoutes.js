@@ -2,7 +2,9 @@ import express from "express";
 
 import multer from "multer";
 
-//import listAllPosts from "../controllers/postsController.js";
+import swaggerUi from 'swagger-ui-express';
+
+import swaggerFile from "../../swagger.json" assert { type: "json" };
 
 import {PostController} from "../controllers/postsController.js"
 
@@ -10,22 +12,20 @@ import { UploadImageController } from "../controllers/uploadController.js";
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-      // Especifica o diretório para armazenar as imagens enviadas
-      cb(null, 'uploads/'); // Substitua por seu caminho de upload desejado
+      cb(null, 'uploads/'); 
     },
     filename: function (req, file, cb) {
-      // Mantém o nome original do arquivo por simplicidade
-      cb(null, file.originalname); // Considere usar uma estratégia de geração de nomes únicos para produção
+      cb(null, file.originalname); 
     }
   });
   
-  // Cria uma instância do middleware Multer
+  
   const upload = multer({ storage: storage });
-
-
 
 const route = (app) => {
     app.use(express.json());
+
+    app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
     app.get('/posts',new PostController().listAllPosts);
 
